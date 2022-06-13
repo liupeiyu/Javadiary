@@ -1,0 +1,5 @@
+{
+  "pytest/api_testcase/test_api_login.py": true, 
+  "pytest/api_testcase/test_api_manage.py": true, 
+  "pytest/web_testcases/test_web_login.py": true
+}

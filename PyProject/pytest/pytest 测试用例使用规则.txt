@@ -1,0 +1,95 @@
+pytest 测试用例使用规则
+
+必须是test_开头或者_test结尾
+测试类必须是Test开头，并且不能有init方法
+测试方法必须是test开头
+
+pytest 运行方式
+
+主函数方式 pytest.main()
+命令行模式 pytest
+通过读取 pytest.ini 配置文件
+
+参数详解：
+
+-s:输出调试信息
+-v：显示更详细的信息
+-n:支持多线程，分布式运行
+--reruns :失败用例重跑
+-x:失败一次直接停止。后面的用例不再执行
+--maxfail: 最大失败用例数
+-k:执行测试用例中部分测试用例（匹配过滤），比如 -k "open"
+--html:
+--html ./report/report.html
+
+pytest 执行用例的顺序是怎么样的？
+
+默认从上到下。
+
+如果需要调整顺序
+@pytest.mark.run(order=1)
+def xxx()
+@pytest.mark.run(order=2)
+
+
+
+
+举例：
+1、主函数模式：
+运行所有模块 pytest.main()
+运行特定模块 pytest.main(["test_login.py"])
+运行特定目录 pytest.main(["-vs","./mulu"])
+通过nodeID方式  pytest.main(["-vs","./mulu/test_login.py::test_01_baidu"])
+目录/文件::类::方法
+
+pytest.main(["-vs","./mulu/test_login.py::test_01_baidu"，"--reruns=2"]) 重跑两次
+
+
+2、命令行模式：
+
+运行所有模块 pytest
+运行特定模块 pytest -vs test_login.py
+运行特定目录 pytest -vs ./mulu
+多线程使用-n  pytest -vs ./mulu -n 2
+代表使用两个线程执行
+
+
+3、pytest.ini 配置文件
+
+单元测试框架的核心配置文件
+一般放置在根目录下
+编码必须是ANSI
+可以改变pytest的规则行为
+
+内容说明：
+
+[pytest]
+addopts = -vs 参数规则
+doctest_encoding = ANSI 编码规则
+testpaths='./testcase' 路径规则
+python_files = test_*.py 文件名规则
+python_classes = Test* 类名规则
+python_functions = test* 方法规则
+log_format = %(asctime)s %(levelname)s %(message)s
+log_date_format = %Y-%m-%d %H:%M:%S
+markers = 
+	smoke:冒烟用例
+	usermanage:用户管理模块
+
+分组执行(冒烟，分模块，分接口和web)
+smoke
+
+
+配置文件中需要添加：
+
+
+@pytest.main.smoke
+
+
+命令行执行时 pytest -vs -m "smoke" 
+
+
+https://d1.xia12345.com/down/201704/30/scl71.mp4
+
+
+

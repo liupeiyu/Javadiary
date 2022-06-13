@@ -1,0 +1,13 @@
+pytest 优势
+
+pytest 是一个非常成熟的python 的单元框架
+pytest 可以和selenium，requests，appium实现自动化
+pytest 可以实现测试用例的跳过和reruns失败用例重使
+pytest 可以和jenkins结合持续集成
+pytest 有很多非常强大的插件：
+pytest-html 生成html格式的自动化测试报告
+pytest-xdist 测试用例分布式执行，多cpu分发
+pytest-ordering 改变测试用例的执行顺序
+pytest-rerunfailures 用例失败后的重跑
+allure-pytest 用于生成美观的测试报告
+
